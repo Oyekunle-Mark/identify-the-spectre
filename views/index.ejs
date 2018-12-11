@@ -1,0 +1,25 @@
+<%# include the header file %>
+<% include header %>
+
+<%# loop through the entries array with a forEach loop and print the results in a bootstrap panel %>
+<% if (entries.length) { %>
+    <% entries.forEach(function(entry) { %>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="text-muted pull-right">
+                    <%= entry.published %>
+                </div>
+                <% entry.title %>
+            </div>
+            <div class="panel-body">
+                <%= entry.content %>
+            </div>
+        </div>
+    <% }) %>
+<%# if there is no data in the array %>
+<% } else { %>
+    No entries! <a href="/new-entry">Add one!</a>
+<% } %>
+
+<%# include the footer %>
+<% include footer %>
