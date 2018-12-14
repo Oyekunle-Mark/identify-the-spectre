@@ -3,6 +3,14 @@ let express = require('express');
 let path = require('path');
 let bodyParser = require('body-parser');
 let logger = require('morgan');
+let https = require('https');
+let fs = require('fs');
+
+//https credentials
+const options = {
+	key: fs.readFileSync('certs/client-key.pem'),
+	cert: fs.readFileSync('certs/client-cert.pem')
+};
 
 //create an express app
 let app = express();
@@ -58,4 +66,9 @@ app.use(function(req, res) {
 //start the server
 http.createServer(app).listen(3000, function() {
 	console.log('Guestbook app running on port 3000.');
+});
+
+//start the https server
+https.createServer(options, app).listen(4000, function() {
+	console.log('Guestbook https app running on port 4000.');
 });
